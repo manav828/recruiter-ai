@@ -1,38 +1,28 @@
-.App {
-  text-align: center;
+/* Custom styles to complement Bootstrap */
+.bg-opacity-10 {
+  --bs-bg-opacity: 0.1;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.cursor-pointer {
+  cursor: pointer;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Hover effects */
+.border-secondary:hover {
+  border-color: #6c757d !important;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* Transition effects */
+.border,
+.bg-primary,
+.bg-light,
+.text-primary,
+.text-muted {
+  transition: all 0.2s ease-in-out;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* side bar design */
+.bg-sidebar{
+  background-color: #f6f7fb;
+  border-radius: 12px;
 }
