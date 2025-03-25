@@ -26,3 +26,7 @@
   background-color: #f6f7fb;
   border-radius: 12px;
 }
+
+.content-area{
+  padding: 40px 90px !important;
+}

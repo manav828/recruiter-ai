@@ -122,14 +122,11 @@ function App() {
             {/* Pass selectedStep and setSelectedStep to Sidebar */}
             <Sidebar selectedStep={selectedStep} setSelectedStep={setSelectedStep} />
           </div>
-          <div className="col-md-9 p-4 p-md-5">
+          <div className="col-md-9  content-area">
             {/* Conditional rendering based on selected step */}
             {selectedStep === 1 && (
               <>
-                <h1 className="h3 fw-bold mb-2">Import your data to get Started</h1>
-                <p className="text-muted mb-4">
-                  Choose the most up-to-date and complete source to auto-fill your information
-                </p>
+               
 
                 <ImportOptions onFileChange={handleFileChange}/>
 

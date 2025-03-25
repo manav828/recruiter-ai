@@ -167,15 +167,19 @@ function ImportOptions({ onFileChange }) {
   return (
 
     <>
-
+ <h1 className="heading1 fw-bold mb-2">Import your data to get Started</h1>
+                <p className="subtext1 text-muted mb-4">
+                  Choose the most up-to-date and complete source to auto-fill your information
+                </p>
       <div className="row g-3">
         {/* Loop through each option and render UI */}
         {options.map((option) => (
           <div className="col-md-4" key={option.id}>
             <div
-              className={`border rounded p-4 d-flex flex-column align-items-center justify-content-center h-100 cursor-pointer ${option.selected ? "selected-br-card selected-bg-card bg-opacity-10" : "border-secondary"
+              className={`${option.id == 'upload' ? "import-box-select font-color":"import-box" } p-4 d-flex flex-column align-items-center justify-content-center h-100 cursor-pointer ${option.selected ? "selected-br-card selected-bg-card bg-opacity-10" : "border-secondary"
                 }`}
-              style={{ cursor: "pointer", minHeight: "140px" }} // Ensure a minimum height
+             style={{ cursor: "pointer", maxHeight: "120px", padding: "1rem" }}
+ // Ensure a minimum height
             >
               {/* Icon container */}
               <div
@@ -191,7 +195,7 @@ function ImportOptions({ onFileChange }) {
               </div>
 
               {/* Display option name */}
-              <span className="small fw-medium selected-font">{option.name}</span>
+              <span className="small fw-bold selected-font">{option.name}</span>
             </div>
           </div>
         ))}
@@ -200,8 +204,8 @@ function ImportOptions({ onFileChange }) {
 
 
       <div className="mt-5">
-        <h2 className="h5 fw-semibold mb-2">Upload your resume</h2>
-        <p className="text-muted mb-3">
+        <h2 className="heading1 fw-bold mb-2">Upload your resume</h2>
+        <p className="subtext1 text-muted mb-3">
           Please upload one of .pdf, .docx, .png, .jpg, .jpeg
         </p>
 
@@ -209,7 +213,7 @@ function ImportOptions({ onFileChange }) {
 
 
         <div
-          className={`border border-2 border-dashed rounded p-4 text-center ${isDragging ? "border-primary bg-primary bg-opacity-10" : "border-secondary"
+          className={`resumeUpload border-1 border-dashed rounded p-4 text-center ${isDragging ? "border-primary bg-primary bg-opacity-10" : "border-secondary"
             }`}
           style={{ cursor: "pointer" }}
           onDragOver={handleDragOver}  // Listen for drag over event
@@ -229,11 +233,11 @@ function ImportOptions({ onFileChange }) {
           <div className="py-3">
             {/* File icon */}
             <div className="flex justify-center">
-    <FileIcon className="text-primary mb-3" size={40} />
+    <FileIcon className="font-color mb-3" size={40} />
   </div>
             {/* Instruction text */}
             <p className="mb-1">
-              Drop file here or <span className="text-primary">click to select</span>
+              Drop file here or <span className="font-color">click to select</span>
             </p>
             <p className="text-muted small">PDF, DOCX, JPG, and PNG files are allowed</p>
 
@@ -247,13 +251,14 @@ function ImportOptions({ onFileChange }) {
           </div>
         </div>
 
-        <div className="mt-4 d-flex align-items-start gap-2">
+        <div className="data-privacy mt-4 d-flex align-items-center  gap-2">
           <CheckCircle className="text-success" size={20} />
-          <p className="text-muted small">
+          <p className="text-muted small d-flex align-items-center dp-text">
             Data Privacy is the top priority at Jobs Agent. Your resume will only be
             used for job matching and will never be shared with third parties.
           </p>
         </div>
+
 
         <div className="mt-5 d-flex justify-content-end">
           <button className="btn btn-primary">
