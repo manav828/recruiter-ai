@@ -81,29 +81,34 @@ import { Upload, Linkedin, PenSquare } from "lucide-react" // Importing icons fr
 import "../styles/importoption.css" // Importing custom styles
 import { useState, useRef } from "react"  // Import React hooks
 import { FileIcon } from "lucide-react"   // Import file icon component from lucide-react
-import { CheckCircle } from "lucide-react"
+import { CheckCircle } from "lucide-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUpload, faPen } from "@fortawesome/free-solid-svg-icons";
+import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
+
+
 
 // Array of import options
 const options = [
   {
-    id: "upload", // Unique identifier
-    name: "Upload Resume", // Display name
-    icon: Upload, // Icon component
-    selected: true, // Indicates if this option is selected
+    id: "upload",
+    name: "Upload Resume",
+    icon: faUpload, // FontAwesome icon class
+    selected: true,
   },
   {
     id: "linkedin",
     name: "Connect LinkedIn",
-    icon: Linkedin,
+    icon: faLinkedin, // FontAwesome LinkedIn icon
     selected: false,
   },
   {
     id: "manual",
     name: "Add Manually",
-    icon: PenSquare,
+    icon: faPen, // FontAwesome Pen icon
     selected: false,
   },
-]
+];
 
 function ImportOptions({ onFileChange }) {
 
@@ -174,11 +179,15 @@ function ImportOptions({ onFileChange }) {
             >
               {/* Icon container */}
               <div
-                className={`rounded-circle d-flex align-items-center justify-content-center mb-3 ${option.selected ? "bg-primary bg-opacity-10 text-primary" : "bg-light text-dark"
+                className={` d-flex align-items-center justify-content-center mb-3 ${option.selected ? "  text-primary" : " text-dark"
                   }`}
                 style={{ width: "48px", height: "48px" }} // Set fixed size for icon container
               >
-                <option.icon size={24} /> {/* Render the icon dynamically */}
+                {/* <FontAwesomeIcon icon="fa-brands fa-linkedin" /> */}
+                <FontAwesomeIcon icon={option.icon} size="lg" />
+             
+
+                {/* Render the icon dynamically */}
               </div>
 
               {/* Display option name */}
@@ -219,8 +228,9 @@ function ImportOptions({ onFileChange }) {
 
           <div className="py-3">
             {/* File icon */}
-            <FileIcon className="text-primary mb-3" size={40} />
-
+            <div className="flex justify-center">
+    <FileIcon className="text-primary mb-3" size={40} />
+  </div>
             {/* Instruction text */}
             <p className="mb-1">
               Drop file here or <span className="text-primary">click to select</span>
