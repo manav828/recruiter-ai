@@ -1,162 +1,69 @@
-// import { useState } from "react"
-// import "bootstrap/dist/css/bootstrap.min.css"
-// import "./App.css"
-// import Sidebar from "./components/Sidebar"
-// import ImportOptions from "./components/ImportOptions"
-// import FileUpload from "./components/FileUpload"
-// import { CheckCircle } from "lucide-react"
-
-// function App() {
-//   const [selectedFile, setSelectedFile] = useState(null)
-//   const [selectedStep, setSelectedStep] = useState(1) // Manage sidebar selection
-
-//   const handleFileChange = (file) => {
-//     setSelectedFile(file)
-//   }
-
-//   return (
-//     <div className="min-vh-100 p-3 p-md-5">
-//       <div className="container rounded overflow-hidden">
-//         <div className="row">
-//           <div className="col-md-3 bg-sidebar p-4">
-//             {/* Pass selectedStep and setSelectedStep to Sidebar */}
-//             <Sidebar selectedStep={selectedStep} setSelectedStep={setSelectedStep} />
-//           </div>
-//           <div className="col-md-9 p-4 p-md-5">
-//             {/* Conditional rendering based on selected step */}
-//             {selectedStep === 1 && (
-//               <>
-//                 <h1 className="h3 fw-bold mb-2">Import your data to get Started</h1>
-//                 <p className="text-muted mb-4">
-//                   Choose the most up-to-date and complete source to auto-fill your information
-//                 </p>
-
-//                 <ImportOptions />
-
-//                 <div className="mt-5">
-//                   <h2 className="h5 fw-semibold mb-2">Upload your resume</h2>
-//                   <p className="text-muted mb-3">
-//                     Please upload one of .pdf, .docx, .png, .jpg, .jpeg
-//                   </p>
-
-//                   <FileUpload onFileChange={handleFileChange} />
-
-//                   <div className="mt-4 d-flex align-items-start gap-2">
-//                     <CheckCircle className="text-success" size={20} />
-//                     <p className="text-muted small">
-//                       Data Privacy is the top priority at Jobs Agent. Your resume will only be
-//                       used for job matching and will never be shared with third parties.
-//                     </p>
-//                   </div>
-
-//                   <div className="mt-5 d-flex justify-content-end">
-//                     <button className="btn btn-primary">
-//                       Continue <span className="ms-1">→</span>
-//                     </button>
-//                   </div>
-//                 </div>
-//               </>
-//             )}
-
-//             {selectedStep === 2 && (
-//               <>
-//                 <h1 className="h3 fw-bold mb-2">My Information</h1>
-//                 <p className="text-muted mb-4">Enter your personal details to proceed.</p>
-//                 {/* My information form */}
-//               </>
-//             )}
-
-//             {selectedStep === 3 && (
-//               <>
-//                 <h1 className="h3 fw-bold mb-2">My Experience</h1>
-//                 <p className="text-muted mb-4">Provide details of your work experience.</p>
-//                 {/* Experience input fields here */}
-//               </>
-//             )}
-
-           
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default App
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-import { useState } from "react"
-// import "bootstrap/dist/css/bootstrap.min.css"
-import "./App.css"
-import Sidebar from "./components/Sidebar"
-import ImportOptions from "./components/ImportOptions"
-
-import JobProfileForm from "./components/MyInformation"
+import { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+import "./App.css";
+import Sidebar from "./components/Sidebar";
+import ImportOptions from "./components/ImportOptions";
+import JobProfileForm from "./components/MyInformation";
 
 function App() {
-  const [selectedFile, setSelectedFile] = useState(null)
-  const [selectedStep, setSelectedStep] = useState(1) // Manage sidebar selection
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedStep, setSelectedStep] = useState(1);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
 
-  const handleFileChange = (file) => {
-    setSelectedFile(file)
-  }
+  // Update isMobile state on window resize
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 992);
+      if (window.innerWidth >= 992) {
+        setSidebarOpen(false); // Close sidebar on larger screens
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
-    <div className="min-vh-100 p-3 p-md-5">
+    <div className="min-vh-100">
+      {/* White background toggle button only when sidebar is hidden */}
+      {isMobile && !sidebarOpen && (
+        <nav className="mobile-navbar">
+          <button className="toggle-btn" onClick={() => setSidebarOpen(true)}>
+            <FontAwesomeIcon icon={faBars} size="lg" />
+          </button>
+        </nav>
+      )}
+
       <div className="container rounded overflow-hidden">
         <div className="row">
-          <div className="col-md-3 bg-sidebar p-4">
-            {/* Pass selectedStep and setSelectedStep to Sidebar */}
+          {/* Sidebar */}
+          <div className={`col-md-3 bg-sidebar p-4 ${isMobile ? "sidebar-mobile" : ""} ${sidebarOpen ? "open" : ""}`}>
+            {isMobile && (
+              <button className="close-btn" onClick={() => setSidebarOpen(false)}>
+                <FontAwesomeIcon icon={faTimes} size="lg" />
+              </button>
+            )}
             <Sidebar selectedStep={selectedStep} setSelectedStep={setSelectedStep} />
           </div>
-          <div className="col-md-9  content-area">
-            {/* Conditional rendering based on selected step */}
-            {selectedStep === 1 && (
-              <>
-               
 
-                <ImportOptions onFileChange={handleFileChange}/>
-
-              
-              </>
-            )}
-
-            {selectedStep === 2 && (
-              <>
-                {/* <h1 className="h3 fw-bold mb-2">My Information</h1>
-                <p className="text-muted mb-4">Enter your personal details to proceed.</p>
-                My information form */}
-                <JobProfileForm/>
-              </>
-            )}
-
+          {/* Main Content */}
+          <div className=" content-area col-lg-9">
+            {selectedStep === 1 && <ImportOptions onFileChange={setSelectedFile} />}
+            {selectedStep === 2 && <JobProfileForm />}
             {selectedStep === 3 && (
               <>
                 <h1 className="h3 fw-bold mb-2">My Experience</h1>
                 <p className="text-muted mb-4">Provide details of your work experience.</p>
-                {/* Experience input fields here */}
               </>
             )}
-
-           
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

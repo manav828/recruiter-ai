@@ -17,7 +17,7 @@ function Sidebar({ selectedStep, setSelectedStep }) {
   return (
     <div>
       {/* Sidebar title */}
-      <h2 className="h4 fw-bold mb-4">Jobs Agent</h2>
+      <h2 className="h4 fw-bold mb-4 text-dark">Jobs Agent</h2>
 
       {/* Navigation Menu */}
       <nav>
@@ -41,7 +41,7 @@ function Sidebar({ selectedStep, setSelectedStep }) {
             </div>
 
             {/* Step Name */}
-            <span className={`small ${selectedStep === step.id ? "fw-medium text-purple" : "text-muted"}`}>
+            <span className={`small ${selectedStep === step.id ? "fw-medium text-dark" : "text-muted"}`}>
               {step.name}
             </span>
 

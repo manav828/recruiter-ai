@@ -1,10 +1,13 @@
 .selected-bg-card{
 background-color: #f7f5ff;
+border: 2px solid #4E26FF;
+
+border-color: #8f83c3;
+color: #4E26FF;
+
 }
 
-.selected-br-card{
-    border-color: #8f83c3;
-}
+
 
 .selected-font{
 font-weight: bold;

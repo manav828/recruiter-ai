@@ -27,6 +27,72 @@
   border-radius: 12px;
 }
 
-.content-area{
-  padding: 40px 90px !important;
+
+
+
+
+
+
+
+
+
+
+/* Navbar with white background only when sidebar is hidden */
+.mobile-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px 15px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  z-index: 1052;
+  height: 50px;
+}
+
+/* Toggle Button */
+.toggle-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+/* Sidebar for Mobile */
+.sidebar-mobile {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 250px;
+  height: 100%;
+  background: #f8f9fa;
+  transition: left 0.3s ease-in-out;
+  z-index: 1051;
+}
+
+.sidebar-mobile.open {
+  left: 0;
+}
+
+/* Hide white navbar when sidebar is open */
+.sidebar-mobile.open + .mobile-navbar {
+  display: none;
+}
+
+/* Push content down to avoid navbar overlap in mobile/tablet */
+@media (max-width: 991px) {
+  .content-area {
+    margin-top: 60px !important;
+  }
+}
+
+
+@media (min-width:991px) {
+  .content-area{
+    padding: 40px 90px !important;
+  }
 }
