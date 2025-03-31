@@ -20,7 +20,7 @@ font-weight: bold;
 
 .import-box-select{
     border: 2px solid #4E26FF;
-    border-radius: 25px;
+    border-radius: 20px;
 
 }
 
@@ -62,4 +62,9 @@ font-weight: bold;
     height: 100%;
     margin: 0px;
     padding-left: 7px;
+}
+
+
+.selectCard{
+    height: 127px;
 }

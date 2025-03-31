@@ -1,119 +1,6 @@
-// import React from "react";
-
-// const JobProfileForm = () => {
-//   return (
-// <>
-
-//       {/* Main Content */}
-//       <div className="flex-1 p-10">
-//         <h1 className="text-2xl font-semibold mb-4">Verify your profile information</h1>
-//         <p className="text-gray-600 mb-8">
-//           We have autofilled your information from your resume or LinkedIn profile.
-//           Please verify and update if anything is missing or incorrect.
-//         </p>
-//         <form className="space-y-8">
-//           {/* Profile Section */}
-//           <Section title="Profile">
-//             <Input label="Full Name" defaultValue="Harsh Shah" />
-//             <Input label="Job Title" defaultValue="Senior Product Designer" />
-//             <Input label="Phone Number" defaultValue="0728233333" />
-//             <Input label="LinkedIn URL" defaultValue="www.linkedin.in" />
-//           </Section>
-
-//           {/* Address Section */}
-//           <Section title="Address">
-//             <Input label="Address Line 1" defaultValue="San Francisco" />
-//             <Input label="City" defaultValue="San Francisco" />
-//             <Input label="Postal Code" defaultValue="94103" />
-//             <Input label="State" defaultValue="California" />
-//           </Section>
-
-//           {/* Phone Section */}
-//           <Section title="Phone">
-//             <Select label="Phone Device Type" options={["Select One"]} />
-//             <div className="flex">
-//               <select className="border border-gray-300 rounded-l-md p-2">
-//                 <option>IN (+91)</option>
-//               </select>
-//               <input type="text" className="w-full border border-gray-300 rounded-r-md p-2" />
-//             </div>
-//           </Section>
-
-//           {/* Job Preference Section */}
-//           <Section title="Job Preference">
-//             <Input label="Experience Level" defaultValue="Entry" />
-//             <Input label="Minimum Salary" defaultValue="$40,000" />
-//             <div className="mt-4">
-//               <label className="block text-gray-700">Job Type</label>
-//               <div className="flex items-center space-x-4">
-//                 <Radio name="jobType" label="Full Time" defaultChecked />
-//                 <Radio name="jobType" label="Part Time" />
-//               </div>
-//             </div>
-//           </Section>
-
-//           {/* Buttons */}
-//           <div className="flex justify-between mt-8">
-//             <button type="button" className="bg-gray-200 text-gray-700 px-6 py-2 rounded-md">
-//               Back
-//             </button>
-//             <button type="submit" className="bg-blue-600 text-white px-6 py-2 rounded-md">
-//               Save and Continue <i className="fas fa-arrow-right ml-2"></i>
-//             </button>
-//           </div>
-//         </form>
-//       </div>
-//       </>
-
-//   );
-// };
-
-// const Section = ({ title, children }) => (
-//   <div>
-//     <h2 className="text-lg font-semibold mb-4">{title}</h2>
-//     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">{children}</div>
-//   </div>
-// );
-
-// const Input = ({ label, defaultValue }) => (
-//   <div>
-//     <label className="block text-gray-700">{label}</label>
-//     <input type="text" className="w-full border border-gray-300 rounded-md p-2" defaultValue={defaultValue} />
-//   </div>
-// );
-
-// const Select = ({ label, options }) => (
-//   <div>
-//     <label className="block text-gray-700">{label}</label>
-//     <select className="w-full border border-gray-300 rounded-md p-2">
-//       {options.map((option, index) => (
-//         <option key={index}>{option}</option>
-//       ))}
-//     </select>
-//   </div>
-// );
-
-// const Radio = ({ name, label, defaultChecked }) => (
-//   <label className="flex items-center">
-//     <input type="radio" name={name} className="form-radio text-blue-600" defaultChecked={defaultChecked} />
-//     <span className="ml-2">{label}</span>
-//   </label>
-// );
-
-// export default JobProfileForm;
-
-
-
-
-
-
-
-
-"use client"
-
 import { useState } from "react"
 import { ChevronRight } from "lucide-react"
-import "../styles/MyInformation.css"
+import "./UserFormStyle/MyInformation.css"
 
 export default function ProfileVerificationForm() {
   const [formData, setFormData] = useState({
@@ -157,7 +44,7 @@ export default function ProfileVerificationForm() {
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} id="myinfo">
+      <form onSubmit={handleSubmit} id="myinfo" className="border-t border-gray-200 pt-8">
         {/* Profile Section */}
         <div className="mb-8">
           <div className="flex flex-col md:flex-row md:items-start mb-6" id="profile">
