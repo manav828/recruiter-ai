@@ -210,6 +210,10 @@ import { CalendarIcon, PlusIcon, Trash2Icon } from "lucide-react"
 import "./UserFormStyle/step3.css";
 import { ReactComponent as UploadResume } from "../icons/uploadResume.svg";
 import { ReactComponent as Note } from "../icons/note.svg";
+import { ReactComponent as CheckmarkIcon } from "../icons/checkmark.svg";
+
+
+
 const SkillTag = ({ skill, onRemove }) => (
     <div className="bg-gray-100 text-gray-700 px-3 py-1 rounded-lg flex items-center space-x-2">
         <span>{skill}</span>
@@ -217,7 +221,7 @@ const SkillTag = ({ skill, onRemove }) => (
     </div>
 );
 
-export default function Experience() {
+export default function Experience({setSelectedStep}) {
 
     // for tags
     const [skills, setSkills] = useState([
@@ -337,11 +341,32 @@ export default function Experience() {
         setUploadedFile(null);
     };
 
+
+
+    // for website url -------
+
+    const [websiteUrls, setWebsiteUrls] = useState([""]);
+
+    const handleAddWebsite = () => {
+        setWebsiteUrls([...websiteUrls, ""]);
+    };
+
+    const handleRemoveWebsite = (index) => {
+        setWebsiteUrls(websiteUrls.filter((_, i) => i !== index));
+    };
+
+    const handleWebsiteInputChange = (index, value) => {
+        const newUrls = [...websiteUrls];
+        newUrls[index] = value;
+        setWebsiteUrls(newUrls);
+    };
+
+
     return (
         <div className="max-w-4xl mx-auto">
             <div className="mb-8">
                 <h1 className="text-2xl font-bold text-gray-900 mb-2">Enter your Experience</h1>
-                <p className="text-gray-600">
+                <p className="text-gray-600 smText">
                     Tell us about your experience, skill, and education-so we can match you with the best opportunities!
                 </p>
             </div>
@@ -355,7 +380,7 @@ export default function Experience() {
                             {experiences.map((exp, index) => (
                                 <div key={index}>
                                     <div className="flex justify-between items-center mb-6">
-                                        <h2 className="text-xl font-semibold">Work Experience </h2>
+                                        <h2 className="text-xl font-semibold">Work Experience {index + 1} </h2>
                                         <button
                                             className="text-red-500 flex items-center gap-1"
                                             onClick={() => deleteExperience(index)}
@@ -406,17 +431,17 @@ export default function Experience() {
                                         />
                                     </div>
 
-                                    <div className="flex items-center items-end gap-4">
-                                        <div className="flex flex-col item-center">
+                                    <div className="flex flex-col sm:flex-row sm:items-center sm:items-end gap-4">
+                                        <div className="flex flex-col  w-full sm:w-auto">
                                             <label htmlFor={`fromDate-${index}`} className="text-sm font-medium text-gray-700 mb-1">
                                                 From
                                             </label>
-                                            <div className="relative">
+                                            <div className="relative w-full sm:w-auto">
                                                 <input
                                                     type="text"
                                                     id={`fromDate-${index}`}
                                                     name="fromDate"
-                                                    className="w-40 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10 calendarInput"
+                                                    className="w-full sm:w-40 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10 calendarInput"
                                                     value={exp.fromDate}
                                                     onChange={(e) => handleInputChange(e, index)}
                                                 />
@@ -424,16 +449,16 @@ export default function Experience() {
                                             </div>
                                         </div>
 
-                                        <div className="flex flex-col">
+                                        <div className="flex flex-col  w-full sm:w-auto">
                                             <label htmlFor={`toDate-${index}`} className="text-sm font-medium text-gray-700 mb-1">
                                                 To
                                             </label>
-                                            <div className="relative">
+                                            <div className="relative w-full sm:w-auto">
                                                 <input
                                                     type="text"
                                                     id={`toDate-${index}`}
                                                     name="toDate"
-                                                    className="w-40 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10 calendarInput"
+                                                    className="w-full sm:w-40 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10 calendarInput"
                                                     value={exp.toDate}
                                                     disabled={exp.currentlyWorking}
                                                     onChange={(e) => handleInputChange(e, index)}
@@ -442,8 +467,8 @@ export default function Experience() {
                                             </div>
                                         </div>
 
-                                        <div className="flex flex-col">
-                                            <label className="text-sm font-medium text-gray-700 mb-1 invisible">
+                                        <div className="flex flex-col  w-full sm:w-auto">
+                                            <label className="invisible-text text-sm font-medium text-gray-700 mb-1 invisible sm:visible">
                                                 Placeholder
                                             </label>
                                             <div className="flex items-center gap-2">
@@ -531,8 +556,11 @@ export default function Experience() {
                     </div>
 
 
+
+
+                    {/* upload cv section */}
                     <div className="flex flex-col md:flex-row md:items-start mb-6 border-t border-gray-200 pt-8" id="file">
-                        <h2 className="text-lg font-semibold text-gray-800 mb-2 w-full md:w-1/4 py-4">CV/Gradesheet</h2>
+                        <h2 className="text-lg font-semibold text-gray-800 mb-2 w-full md:w-1/4 pt-1">CV/Gradesheet</h2>
 
 
                         <div className="w-full md:w-3/4 space-y-4  mt-2">
@@ -554,26 +582,115 @@ export default function Experience() {
 
                             {/* Uploaded File */}
                             {uploadedFile && (
-                                <div className="flex items-center justify-between mt-4 px-3  border border-gray-200 rounded-lg shadow-sm">
-                                    <div className="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg shadow-sm">
-                                        {/* Icon on the left */}
+                                <div className="flex items-center justify-between mt-4 px-3 border border-gray-200 rounded-lg bg-uploaded">
+                                    {/* Left Section: File Icon + Details */}
+                                    <div className="flex items-center space-x-3">
+                                        {/* File Icon */}
                                         <Note className="text-gray-500" width="24px" height="24px" />
 
                                         {/* File Details */}
                                         <div>
                                             <p className="text-gray-800 text-sm font-medium mb-1 smText">{uploadedFile.name}</p>
-                                            <p className="text-gray-500 text-xs mb-1">{uploadedFile.size} KB · <span className="text-green-500">Uploaded</span></p>
+                                            <p className="text-gray-500 text-xs mb-1">{uploadedFile.size} KB · <span className="text-green-500"> <CheckmarkIcon className="text-gray-500" width="10px" height="10px" />Uploaded</span></p>
                                         </div>
                                     </div>
 
+                                    {/* Right Section: Delete Button */}
                                     <button onClick={handleDelete} className="text-gray-500 hover:text-red-500">
                                         <Trash2Icon className="font-color" width="24px" height="24px" />
                                     </button>
                                 </div>
+
                             )}
                         </div>
 
                     </div>
+
+                    {/* add website url section */}
+                    <div className="mb-8 border-t border-gray-200 pt-8">
+                        <div className="flex flex-col md:flex-row md:items-start mb-6" id="websiteurl">
+                            <div className="w-full md:w-1/4">
+                                <h2 className="text-lg font-semibold text-gray-800 md:mb-0">Websites</h2>
+                                <p className="text-gray-500 smText">Add any relevant websites.</p>
+                            </div>
+
+                            <div className="w-full md:w-3/4 space-y-4">
+                                {websiteUrls.map((url, index) => (
+                                    <div key={index}>
+                                        <label htmlFor={`website_${index}`} className="block text-sm text-gray-600 mb-1">
+                                            Website {index + 1}
+                                        </label>
+                                        <div className="flex items-center space-x-2">
+                                            <input
+                                                type="text"
+                                                id={`website_${index}`}
+                                                name={`website_${index}`}
+                                                value={url}
+                                                onChange={(e) => handleWebsiteInputChange(index, e.target.value)}
+                                                className="w-full px-4 py-2 border border-input border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                                placeholder="URL"
+                                            />
+                                            {websiteUrls.length > 1 && (
+                                                <button
+                                                    type="button"
+                                                    onClick={() => handleRemoveWebsite(index)}
+                                                    className="p-2 border border-gray-300 rounded-full text-gray-500 hover:text-red-500 hover:border-red-500 transition-all"
+                                                >
+                                                    <Trash2Icon width="20px" height="20px" />
+                                                </button>
+                                            )}
+                                        </div>
+                                    </div>
+                                ))}
+
+                                <div className="flex justify-center mt-6">
+                                    <button
+                                        type="button"
+                                        onClick={handleAddWebsite}
+                                        className="flex items-center gap-2 text-blue-600 border border-blue-600 rounded-full px-4 py-2 hover:bg-blue-50 transition-colors"
+                                    >
+                                        <PlusIcon className="h-4 w-4" />
+                                        <span>Add Another</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    {/* add Social Network URL */}
+                    <div className="mb-8 border-t border-gray-200 pt-8">
+                        <div className="flex flex-col md:flex-row md:items-start mb-6" id="socialNetwork">
+                            <div className="w-full md:w-1/4">
+                                <h2 className="text-lg font-semibold text-gray-800 md:mb-0">Social Network URLs</h2>
+
+                            </div>
+
+                            <div className="w-full md:w-3/4 space-y-4">
+
+                                <div >
+                                    <label htmlFor="" className="block text-sm text-gray-600 mb-1">
+                                        Please provide a link to your LinkedIn profile:
+                                    </label>
+                                    <div className="flex items-center space-x-2">
+                                        <input
+                                            type="text"
+                                            id="LinkedinUrl"
+                                            name="LinkedinUrl"
+
+                                            className="w-full px-4 py-2 border border-input border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                            placeholder="Linkedin URL"
+                                        />
+
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
                 {/* Form Actions */}
@@ -586,7 +703,7 @@ export default function Experience() {
                     </button>
                     <button
                         type="submit"
-                        className="px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center"
+                        className="px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center" onClick={() => setSelectedStep(4)}
                     >
                         Save and Continue
                         <ChevronRight className="ml-2 h-4 w-4" />

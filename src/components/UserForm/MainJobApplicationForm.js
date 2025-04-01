@@ -86,6 +86,7 @@ import Sidebar from "./Sidebar";
 import ImportOptions from "./Step1";
 import JobProfileForm from "./Step2";
 import Experience from "./Step3";
+import Step4 from "./step4";
 
 function MainJobApplicationForm() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -131,6 +132,7 @@ function MainJobApplicationForm() {
           {selectedStep === 1 && <ImportOptions onFileChange={setSelectedFile} setSelectedStep={setSelectedStep} />}
           {selectedStep === 2 && <JobProfileForm setSelectedStep={setSelectedStep} />}
           {selectedStep === 3 && <Experience setSelectedStep={setSelectedStep} />}
+          {selectedStep === 4 && <Step4 setSelectedStep={setSelectedStep} />}
         </div>
       </div>
     </div>

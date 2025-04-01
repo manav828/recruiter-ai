@@ -2,7 +2,7 @@ import { useState } from "react"
 import { ChevronRight } from "lucide-react"
 import "./UserFormStyle/MyInformation.css"
 
-export default function ProfileVerificationForm() {
+export default function ProfileVerificationForm({setSelectedStep}) {
   const [formData, setFormData] = useState({
     fullName: "Harsh Shah",
     jobTitle: "Senior Product Designer",
@@ -38,7 +38,7 @@ export default function ProfileVerificationForm() {
     <div className="max-w-4xl mx-auto">
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900 mb-2">Verify your profile information</h1>
-        <p className="text-gray-600">
+        <p className="text-gray-600 smText">
           We have autofilled your information from your resume or LinkedIn profile. Please verify and update if anything
           is missing or incorrect.
         </p>
@@ -325,7 +325,7 @@ export default function ProfileVerificationForm() {
           </button>
           <button
             type="submit"
-            className="px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center"
+            className="px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center" onClick={() => setSelectedStep(3)}
           >
             Save and Continue
             <ChevronRight className="ml-2 h-4 w-4" />

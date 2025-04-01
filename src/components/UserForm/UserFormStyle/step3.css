@@ -1,8 +1,26 @@
-.calendarInput{
-    width: 196.5px;
+
+
+@media screen and (min-width:1000px) {
+    .calendarInput{
+        width: 196.5px;
+    }    
 }
 
 
 .inputYMargin{
     margin: 15px 0px;
+}
+
+.bg-uploaded{
+    background-color: #FAFCFE;
+    border-radius: 20px;
+    height: 70px;
+}
+
+@media screen and (max-width:1000px) {
+    
+    .invisible-text{
+        display: none;
+        padding: 10px;
+    }
 }
