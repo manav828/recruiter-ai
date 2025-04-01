@@ -1,4 +1,4 @@
-/* Custom styles to complement Bootstrap */
+Custom styles to complement Bootstrap
 .bg-opacity-10 {
     --bs-bg-opacity: 0.1;
   }
@@ -27,7 +27,13 @@
     border-radius: 16px;
   }
   
+  .sidebarwidth{
+    max-width: 275px !important;
+  }
   
+  .smText{
+    font-size: 14px;
+  }
   
   
   
@@ -93,6 +99,117 @@
   
   @media (min-width:991px) {
     .content-area{
-      padding: 40px 90px !important;
+      padding: 40px 30px !important;
     }
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /* Overall Layout */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+/* Main Container (Holds Sidebar & Content) */
+.main-container {
+  display: flex;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 275px;
+  background-color: #f6f7fb;
+  border-radius: 16px;
+  padding: 20px;
+}
+
+/* Content Area (Takes Remaining Space) */
+.content-area {
+  flex: 1;
+  padding: 40px 60px;
+}
+
+/* Mobile Navbar */
+.mobile-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px 15px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  z-index: 1052;
+  height: 50px;
+}
+
+/* Sidebar Button */
+.toggle-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+/* Sidebar for Mobile */
+.sidebar-mobile {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 250px;
+  height: 100%;
+  background: #f8f9fa;
+  transition: left 0.3s ease-in-out;
+  z-index: 1051;
+}
+
+.sidebar-mobile.open {
+  left: 0;
+}
+
+/* Hide Mobile Navbar When Sidebar is Open */
+.sidebar-mobile.open + .mobile-navbar {
+  display: none;
+}
+
+/* Push Content Down in Mobile */
+@media (max-width: 991px) {
+  .main-container {
+    flex-direction: column;
+  }
+
+  .content-area {
+    padding: 20px;
+  }
+}

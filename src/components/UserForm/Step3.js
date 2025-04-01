@@ -208,8 +208,49 @@ import { ChevronRight } from "lucide-react"
 // import "./UserFormStyle/MyInformation.css"
 import { CalendarIcon, PlusIcon, Trash2Icon } from "lucide-react"
 import "./UserFormStyle/step3.css";
+import { ReactComponent as UploadResume } from "../icons/uploadResume.svg";
+import { ReactComponent as Note } from "../icons/note.svg";
+const SkillTag = ({ skill, onRemove }) => (
+    <div className="bg-gray-100 text-gray-700 px-3 py-1 rounded-lg flex items-center space-x-2">
+        <span>{skill}</span>
+        <button onClick={() => onRemove(skill)} className="text-gray-500 hover:text-gray-700">&times;</button>
+    </div>
+);
 
 export default function Experience() {
+
+    // for tags
+    const [skills, setSkills] = useState([
+        "User Experience (UX)",
+        "User Interface Design (UI)",
+        "User Flows",
+        "Animation",
+        "Branding",
+        "Wireframing",
+        "User Feedback",
+        "Product Management",
+    ]);
+    const [newSkill, setNewSkill] = useState("");
+
+    const removeSkill = (skill) => {
+        setSkills(skills.filter((s) => s !== skill));
+    };
+
+    const addSkill = () => {
+        if (newSkill.trim() && !skills.includes(newSkill)) {
+            setSkills([...skills, newSkill.trim()]);
+            setNewSkill("");
+        }
+    };
+
+    const handleKeyDown = (e) => {
+        if (e.key === "Enter") {
+            addSkill();
+        }
+    };
+
+
+    // for add work exp
     const [currentlyWorking, setCurrentlyWorking] = useState(false);
     const [formData, setFormData] = useState({
         fullName: "Harsh Shah",
@@ -278,6 +319,22 @@ export default function Experience() {
         e.preventDefault();
         console.log("Form submitted:", experiences);
         // Handle form submission logic here
+    };
+
+
+    // for file upload
+
+    const [uploadedFile, setUploadedFile] = useState(null);
+
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            setUploadedFile({ name: file.name, size: (file.size / 1024).toFixed(1) });
+        }
+    };
+
+    const handleDelete = () => {
+        setUploadedFile(null);
     };
 
     return (
@@ -430,6 +487,92 @@ export default function Experience() {
                                 </button>
                             </div>
                         </div>
+                    </div>
+
+                    <div className="flex flex-col md:flex-row md:items-start mb-6 border-t border-gray-200 pt-8" id="skills">
+                        <div className="w-full md:w-1/4 py-4">
+                            <h2 className="text-lg font-semibold text-gray-800 md:mb-0">Skills</h2>
+                            <p className="text-gray-500 smText">
+                                Based on your resume, suggested skills are displayed below
+                            </p>
+                        </div>
+
+                        <div className="w-full md:w-3/4 space-y-4  mt-2">
+
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                                Type or Add Skills
+                            </label>
+                            {/* Moved the text outside the box */}
+
+                            <div className="flex flex-wrap gap-2 border border-gray-300 rounded-lg p-4">
+                                {skills.map((skill) => (
+                                    <SkillTag key={skill} skill={skill} onRemove={removeSkill} />
+                                ))}
+                            </div>
+
+                            {/* Input field and button container */}
+                            <div className="mt-3 flex gap-2 border border-gray-300 rounded-lg p-2">
+                                <input
+                                    type="text"
+                                    value={newSkill}
+                                    onChange={(e) => setNewSkill(e.target.value)}
+                                    onKeyDown={handleKeyDown}
+                                    className="flex-1 px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    placeholder="Type a skill and press Enter"
+                                />
+                                <button
+                                    onClick={addSkill}
+                                    className="bg-blue-500 text-white px-3 py-1 rounded-lg text-sm hover:bg-blue-600"
+                                >
+                                    Add Skill
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div className="flex flex-col md:flex-row md:items-start mb-6 border-t border-gray-200 pt-8" id="file">
+                        <h2 className="text-lg font-semibold text-gray-800 mb-2 w-full md:w-1/4 py-4">CV/Gradesheet</h2>
+
+
+                        <div className="w-full md:w-3/4 space-y-4  mt-2">
+                            {/* Upload Box */}
+                            <label className="block border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer hover:bg-gray-100 flex flex-col items-center justify-center space-y-2">
+                                <input type="file" className="hidden" onChange={handleFileChange} />
+
+                                <UploadResume className="font-color" width="24px" height="24px" />
+
+                                <p className="text-gray-600 text-sm">
+                                    Drop file here or <span className="text-blue-500 underline">click to select</span>
+                                </p>
+
+                                <p className="text-gray-400 text-xs">
+                                    PDF, DOCX, JPG and PNG files are allowed (5MB max)
+                                </p>
+                            </label>
+
+
+                            {/* Uploaded File */}
+                            {uploadedFile && (
+                                <div className="flex items-center justify-between mt-4 px-3  border border-gray-200 rounded-lg shadow-sm">
+                                    <div className="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg shadow-sm">
+                                        {/* Icon on the left */}
+                                        <Note className="text-gray-500" width="24px" height="24px" />
+
+                                        {/* File Details */}
+                                        <div>
+                                            <p className="text-gray-800 text-sm font-medium mb-1 smText">{uploadedFile.name}</p>
+                                            <p className="text-gray-500 text-xs mb-1">{uploadedFile.size} KB · <span className="text-green-500">Uploaded</span></p>
+                                        </div>
+                                    </div>
+
+                                    <button onClick={handleDelete} className="text-gray-500 hover:text-red-500">
+                                        <Trash2Icon className="font-color" width="24px" height="24px" />
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+
                     </div>
                 </div>
 
