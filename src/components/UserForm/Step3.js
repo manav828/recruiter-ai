@@ -60,7 +60,7 @@
 //                                 </button>
 //                             </div>
 //                             <div className="inputYMargin">
-//                                 <label htmlFor="jobTitle" className="block text-sm font-medium text-gray-700 mb-1">
+//                                 <label htmlFor="jobTitle" className="block text-sm font-medium lable-text mb-1">
 //                                     Job Title
 //                                 </label>
 //                                 <input
@@ -72,7 +72,7 @@
 //                             </div>
 
 //                             <div className="inputYMargin">
-//                                 <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-1">
+//                                 <label htmlFor="company" className="block text-sm font-medium lable-text mb-1">
 //                                     Company
 //                                 </label>
 //                                 <input
@@ -84,7 +84,7 @@
 //                             </div>
 
 //                             <div className="inputYMargin">
-//                                 <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-1">
+//                                 <label htmlFor="location" className="block text-sm font-medium lable-text mb-1">
 //                                     Location
 //                                 </label>
 //                                 <input
@@ -97,7 +97,7 @@
 
 //                             <div className="flex items-center items-end gap-4">
 //                                 <div className="flex flex-col item-center">
-//                                     <label htmlFor="fromDate" className="text-sm font-medium text-gray-700 mb-1">
+//                                     <label htmlFor="fromDate" className="text-sm font-medium lable-text mb-1">
 //                                         From
 //                                     </label>
 //                                     <div className="relative">
@@ -112,7 +112,7 @@
 //                                 </div>
 
 //                                 <div className="flex flex-col">
-//                                     <label htmlFor="toDate" className="text-sm font-medium text-gray-700 mb-1">
+//                                     <label htmlFor="toDate" className="text-sm font-medium lable-text mb-1">
 //                                         To
 //                                     </label>
 //                                     <div className="relative">
@@ -128,7 +128,7 @@
 //                                 </div>
 
 //                                 <div className="flex flex-col">
-//                                     <label className="text-sm font-medium text-gray-700 mb-1 invisible">
+//                                     <label className="text-sm font-medium lable-text mb-1 invisible">
 //                                         Placeholder
 //                                     </label>
 //                                     <div className="flex items-center gap-2">
@@ -139,7 +139,7 @@
 //                                             checked={currentlyWorking}
 //                                             onChange={(e) => setCurrentlyWorking(e.target.checked)}
 //                                         />
-//                                         <label htmlFor="currentlyWorking" className="text-sm text-gray-700">
+//                                         <label htmlFor="currentlyWorking" className="text-sm lable-text">
 //                                             I currently work here
 //                                         </label>
 //                                     </div>
@@ -148,7 +148,7 @@
 
 
 //                             <div className="inputYMargin">
-//                                 <label htmlFor="roleDescription" className="block text-sm font-medium text-gray-700 mb-1">
+//                                 <label htmlFor="roleDescription" className="block text-sm font-medium lable-text mb-1">
 //                                     Role Description
 //                                 </label>
 //                                 <textarea
@@ -176,7 +176,7 @@
 //                 <div className="flex justify-end space-x-4 border-t border-gray-200 pt-6">
 //                     <button
 //                         type="button"
-//                         className="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+//                         className="px-6 py-2 border border-gray-300 rounded-md lable-text hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500"
 //                     >
 //                         Back
 //                     </button>
@@ -203,7 +203,7 @@
 
 
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { ChevronRight } from "lucide-react"
 // import "./UserFormStyle/MyInformation.css"
 import { CalendarIcon, PlusIcon, Trash2Icon } from "lucide-react"
@@ -211,17 +211,18 @@ import "./UserFormStyle/step3.css";
 import { ReactComponent as UploadResume } from "../icons/uploadResume.svg";
 import { ReactComponent as Note } from "../icons/note.svg";
 import { ReactComponent as CheckmarkIcon } from "../icons/checkmark.svg";
+import { ReactComponent as Arrow } from "../icons/arrow.svg";
 
 
 
 const SkillTag = ({ skill, onRemove }) => (
-    <div className="bg-gray-100 text-gray-700 px-3 py-1 rounded-lg flex items-center space-x-2">
+    <div className="bg-gray-100 lable-text px-3 py-1 rounded-lg flex items-center space-x-2">
         <span>{skill}</span>
-        <button onClick={() => onRemove(skill)} className="text-gray-500 hover:text-gray-700">&times;</button>
+        <button onClick={() => onRemove(skill)} className="text-gray-500 hover:lable-text">&times;</button>
     </div>
 );
 
-export default function Experience({setSelectedStep}) {
+export default function Experience({ setSelectedStep }) {
 
     // for tags
     const [skills, setSkills] = useState([
@@ -362,6 +363,33 @@ export default function Experience({setSelectedStep}) {
     };
 
 
+
+    // calander
+    // Handle date input change for "From" and "To" fields
+    const handleCalInputChange = (e, index) => {
+        const { name, value } = e.target;
+        let formattedValue = value;
+
+        // If the field is a date input, format the value as MM/YYYY
+        if (name === "fromDate" || name === "toDate") {
+            if (value) {
+                const date = new Date(value);
+                const month = String(date.getMonth() + 1).padStart(2, "0"); // Get month (0-11) and add 1, pad with 0
+                const year = date.getFullYear();
+                formattedValue = `${month}/${year}`;
+            } else {
+                formattedValue = "";
+            }
+        }
+
+        const updatedExperiences = experiences.map((exp, i) =>
+            i === index ? { ...exp, [name]: formattedValue } : exp
+        );
+        setExperiences(updatedExperiences);
+    };
+
+
+
     return (
         <div className="max-w-4xl mx-auto">
             <div className="mb-8">
@@ -390,7 +418,7 @@ export default function Experience({setSelectedStep}) {
                                         </button>
                                     </div>
                                     <div className="inputYMargin">
-                                        <label htmlFor={`jobTitle-${index}`} className="block text-sm font-medium text-gray-700 mb-1">
+                                        <label htmlFor={`jobTitle-${index}`} className="block text-sm font-medium lable-text mb-1">
                                             Job Title
                                         </label>
                                         <input
@@ -404,7 +432,7 @@ export default function Experience({setSelectedStep}) {
                                     </div>
 
                                     <div className="inputYMargin">
-                                        <label htmlFor={`company-${index}`} className="block text-sm font-medium text-gray-700 mb-1">
+                                        <label htmlFor={`company-${index}`} className="block text-sm font-medium lable-text mb-1">
                                             Company
                                         </label>
                                         <input
@@ -418,7 +446,7 @@ export default function Experience({setSelectedStep}) {
                                     </div>
 
                                     <div className="inputYMargin">
-                                        <label htmlFor={`location-${index}`} className="block text-sm font-medium text-gray-700 mb-1">
+                                        <label htmlFor={`location-${index}`} className="block text-sm font-medium lable-text mb-1">
                                             Location
                                         </label>
                                         <input
@@ -431,9 +459,9 @@ export default function Experience({setSelectedStep}) {
                                         />
                                     </div>
 
-                                    <div className="flex flex-col sm:flex-row sm:items-center sm:items-end gap-4">
+                                    {/* <div className="flex flex-col sm:flex-row sm:items-center sm:items-end gap-4">
                                         <div className="flex flex-col  w-full sm:w-auto">
-                                            <label htmlFor={`fromDate-${index}`} className="text-sm font-medium text-gray-700 mb-1">
+                                            <label htmlFor={`fromDate-${index}`} className="text-sm font-medium lable-text mb-1">
                                                 From
                                             </label>
                                             <div className="relative w-full sm:w-auto">
@@ -450,7 +478,7 @@ export default function Experience({setSelectedStep}) {
                                         </div>
 
                                         <div className="flex flex-col  w-full sm:w-auto">
-                                            <label htmlFor={`toDate-${index}`} className="text-sm font-medium text-gray-700 mb-1">
+                                            <label htmlFor={`toDate-${index}`} className="text-sm font-medium lable-text mb-1">
                                                 To
                                             </label>
                                             <div className="relative w-full sm:w-auto">
@@ -468,7 +496,7 @@ export default function Experience({setSelectedStep}) {
                                         </div>
 
                                         <div className="flex flex-col  w-full sm:w-auto">
-                                            <label className="invisible-text text-sm font-medium text-gray-700 mb-1 invisible sm:visible">
+                                            <label className="invisible-text text-sm font-medium lable-text mb-1 invisible sm:visible">
                                                 Placeholder
                                             </label>
                                             <div className="flex items-center gap-2">
@@ -479,15 +507,70 @@ export default function Experience({setSelectedStep}) {
                                                     checked={exp.currentlyWorking}
                                                     onChange={(e) => handleCurrentlyWorkingChange(index, e.target.checked)}
                                                 />
-                                                <label htmlFor={`currentlyWorking-${index}`} className="text-sm text-gray-700">
+                                                <label htmlFor={`currentlyWorking-${index}`} className="text-sm lable-text">
+                                                    I currently work here
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div> */}
+                                    <div className="flex flex-col sm:flex-row sm:items-center sm:items-end gap-2 sm:gap-4">
+                                        <div className="flex flex-col w-full sm:w-auto">
+                                            <label htmlFor={`fromDate-${index}`} className="text-sm font-medium lable-text mb-1">
+                                                From
+                                            </label>
+                                            <div className="relative w-full sm:w-auto">
+                                                <input
+                                                    type="date"
+                                                    id={`fromDate-${index}`}
+                                                    name="fromDate"
+                                                    className="w-full sm:w-40 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10 calendarInput custom-date-input"
+                                                    value={exp.fromDate ? `${exp.fromDate.split("/")[1]}-${exp.fromDate.split("/")[0]}-01` : ""}
+                                                    onChange={(e) => handleInputChange(e, index)}
+                                                />
+                                                {/* <CalendarIcon className="absolute right-3 top-2.5 h-5 w-5 text-gray-400 pointer-events-none" /> */}
+                                            </div>
+                                        </div>
+
+                                        <div className="flex flex-col w-full sm:w-auto">
+                                            <label htmlFor={`toDate-${index}`} className="text-sm font-medium lable-text mb-1">
+                                                To
+                                            </label>
+                                            <div className="relative w-full sm:w-auto">
+                                                <input
+                                                    type="date"
+                                                    id={`toDate-${index}`}
+                                                    name="toDate"
+                                                    className="w-full sm:w-40 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10 calendarInput custom-date-input"
+                                                    value={exp.toDate ? `${exp.toDate.split("/")[1]}-${exp.toDate.split("/")[0]}-01` : ""}
+                                                    onChange={(e) => handleInputChange(e, index)}
+                                                    disabled={exp.currentlyWorking}
+                                                />
+                                                {/* <CalendarIcon className="absolute right-3 top-2.5 h-5 w-5 text-gray-400 pointer-events-none" /> */}
+                                            </div>
+                                        </div>
+
+                                        <div className="flex flex-col w-full sm:w-auto">
+                                            <label className="invisible-text text-sm font-medium lable-text mb-1 invisible sm:visible">
+                                                Placeholder
+                                            </label>
+                                            <div className="flex items-center gap-2">
+                                                <input
+                                                    type="checkbox"
+                                                    id={`currentlyWorking-${index}`}
+                                                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                                                    checked={exp.currentlyWorking}
+                                                    onChange={(e) => handleCurrentlyWorkingChange(index, e.target.checked)}
+                                                />
+                                                <label htmlFor={`currentlyWorking-${index}`} className="text-sm lable-text">
                                                     I currently work here
                                                 </label>
                                             </div>
                                         </div>
                                     </div>
 
+
                                     <div className="inputYMargin">
-                                        <label htmlFor={`roleDescription-${index}`} className="block text-sm font-medium text-gray-700 mb-1">
+                                        <label htmlFor={`roleDescription-${index}`} className="block text-sm font-medium lable-text mb-1">
                                             Role Description
                                         </label>
                                         <textarea
@@ -504,7 +587,7 @@ export default function Experience({setSelectedStep}) {
 
                             <div className="flex justify-center mt-6">
                                 <button
-                                    className="flex items-center gap-2 text-blue-600 border border-blue-600 rounded-full px-4 py-2 hover:bg-blue-50 transition-colors"
+                                    className="flex items-center gap-2 text-blue-600  rounded-full px-3 py-2 btn-add"
                                     onClick={addExperience}
                                 >
                                     <PlusIcon className="h-4 w-4" />
@@ -524,7 +607,7 @@ export default function Experience({setSelectedStep}) {
 
                         <div className="w-full md:w-3/4 space-y-4  mt-2">
 
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                            <label className="block text-sm font-medium lable-text mb-1 ">
                                 Type or Add Skills
                             </label>
                             {/* Moved the text outside the box */}
@@ -547,7 +630,7 @@ export default function Experience({setSelectedStep}) {
                                 />
                                 <button
                                     onClick={addSkill}
-                                    className="bg-blue-500 text-white px-3 py-1 rounded-lg text-sm hover:bg-blue-600"
+                                    className="px-3 py-1 rounded-lg text-sm  btn-add"
                                 >
                                     Add Skill
                                 </button>
@@ -647,7 +730,7 @@ export default function Experience({setSelectedStep}) {
                                     <button
                                         type="button"
                                         onClick={handleAddWebsite}
-                                        className="flex items-center gap-2 text-blue-600 border border-blue-600 rounded-full px-4 py-2 hover:bg-blue-50 transition-colors"
+                                        className="flex items-center gap-2 text-blue-600  rounded-full px-3 py-2 btn-add"
                                     >
                                         <PlusIcon className="h-4 w-4" />
                                         <span>Add Another</span>
@@ -693,20 +776,21 @@ export default function Experience({setSelectedStep}) {
 
                 </div>
 
+
                 {/* Form Actions */}
-                <div className="flex justify-end space-x-4 border-t border-gray-200 pt-6">
+                <div className="flex justify-end space-x-4 border-t border-gray-200 pt-6 ">
                     <button
                         type="button"
-                        className="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 btn-back"
                     >
                         Back
                     </button>
+
                     <button
-                        type="submit"
-                        className="px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center" onClick={() => setSelectedStep(4)}
+                        className="btn-continue d-flex align-items-center gap-2 border border-gray-300 text-gray-700  focus:outline-none focus:ring-2 focus:ring-indigo-500 btn-continue"
+                        onClick={() => setSelectedStep(4)}
                     >
-                        Save and Continue
-                        <ChevronRight className="ml-2 h-4 w-4" />
+                        Save and Continue <Arrow />
                     </button>
                 </div>
             </form>

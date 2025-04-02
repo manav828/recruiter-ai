@@ -2,8 +2,9 @@ import { useState } from "react";
 import { ChevronRight } from "lucide-react";
 import "./UserFormStyle/MyInformation.css";
 import { CalendarIcon, PlusIcon, Trash2Icon } from "lucide-react";
+import { ReactComponent as Arrow } from "../icons/arrow.svg";
 
-export default function Step4() {
+export default function Step4({ setSelectedStep }) {
 
     // for school section
     const [educationItems, setEducationItems] = useState([
@@ -53,7 +54,7 @@ export default function Step4() {
     return (
         <div className="max-w-4xl mx-auto">
             <div className="mb-8">
-                <h1 className="text-2xl font-bold text-gray-900 mb-2">Education</h1>
+                <h1 className="text-heading font-bold text-gray-900 mb-2">Education</h1>
                 <p className="text-gray-600 smText">
                     Tell us about your work experience, skills, and education—so we can match you with the best opportunities!
                 </p>
@@ -63,12 +64,12 @@ export default function Step4() {
                 {/* Profile Section */}
                 <div className="mb-8">
                     <div className="flex flex-col md:flex-row md:items-start mb-6" id="education">
-                        <h2 className="w-full md:w-1/4 text-lg font-semibold text-gray-800 mb-4 md:mb-0">Education</h2>
+                        <h2 className="w-full md:w-1/4 text-heading font-semibold text-gray-800 mb-4 md:mb-0">Education</h2>
                         <div className="w-full md:w-3/4 space-y-4">
                             {educationItems.map((education, index) => (
-                                <div key={index}>
+                                <div key={index} className={index >0 ? "border-t border-gray-200 py-8 " : "pb-8"}>
                                     <div className="flex justify-between items-center mb-6">
-                                        <h2 className="text-xl font-semibold">Education {index + 1}</h2>
+                                        <h2 className="text-heading font-semibold">Education {index + 1}</h2>
                                         <button
                                             type="button"
                                             className="text-red-500 flex items-center gap-1"
@@ -80,7 +81,7 @@ export default function Step4() {
                                     </div>
 
                                     <div className="inputYMargin">
-                                        <label htmlFor={`school-${index}`} className="block text-sm font-medium text-gray-700 mb-1">
+                                        <label htmlFor={`school-${index}`} className="block text-sm font-medium lable-text mb-1">
                                             School or University
                                         </label>
                                         <input
@@ -99,7 +100,7 @@ export default function Step4() {
                                     </div>
 
                                     <div className="inputYMargin">
-                                        <label htmlFor={`degree-${index}`} className="block text-sm font-medium text-gray-700 mb-1">
+                                        <label htmlFor={`degree-${index}`} className="block text-sm font-medium lable-text mb-1">
                                             Degree
                                         </label>
                                         <input
@@ -118,7 +119,7 @@ export default function Step4() {
                                     </div>
 
                                     <div className="inputYMargin">
-                                        <label htmlFor={`fieldOfStudy-${index}`} className="block text-sm font-medium text-gray-700 mb-1">
+                                        <label htmlFor={`fieldOfStudy-${index}`} className="block text-sm font-medium lable-text mb-1">
                                             Field of Study
                                         </label>
                                         <input
@@ -136,7 +137,7 @@ export default function Step4() {
                                     </div>
 
                                     <div className="inputYMargin w-full md:w-1/2">
-                                        <label htmlFor={`gpa-${index}`} className="block text-sm font-medium text-gray-700 mb-1">
+                                        <label htmlFor={`gpa-${index}`} className="block text-sm font-medium lable-text mb-1">
                                             Overall Result (GPA)
                                         </label>
                                         <input
@@ -154,13 +155,13 @@ export default function Step4() {
                                     </div>
 
                                     <div className="flex flex-col sm:flex-row sm:items-center sm:items-end gap-4">
-                                        <div className="flex flex-col w-full sm:w-auto">
-                                            <label htmlFor={`fromDate-${index}`} className="text-sm font-medium text-gray-700 mb-1">
+                                        <div className="flex flex-col w-full ">
+                                            <label htmlFor={`fromDate-${index}`} className="text-sm font-medium lable-text mb-1">
                                                 From
                                             </label>
                                             <div className="relative w-full sm:w-auto">
                                                 <input
-                                                    type="text"
+                                                    type="month"
                                                     id={`fromDate-${index}`}
                                                     name="fromDate"
                                                     className="w-full sm:w-50 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10"
@@ -171,17 +172,17 @@ export default function Step4() {
                                                         setEducationItems(updatedItems);
                                                     }}
                                                 />
-                                                <CalendarIcon className="absolute right-3 top-2.5 h-5 w-5 text-gray-400" />
+                                                {/* <CalendarIcon className="absolute right-3 top-2.5 h-5 w-5 text-gray-400" /> */}
                                             </div>
                                         </div>
 
-                                        <div className="flex flex-col w-full sm:w-auto">
-                                            <label htmlFor={`toDate-${index}`} className="text-sm font-medium text-gray-700 mb-1">
-                                                To
+                                        <div className="flex flex-col w-full ">
+                                            <label htmlFor={`toDate-${index}`} className="text-sm font-medium lable-text mb-1">
+                                            To (Actual or Expected)
                                             </label>
                                             <div className="relative w-full sm:w-auto">
                                                 <input
-                                                    type="text"
+                                                    type="month"
                                                     id={`toDate-${index}`}
                                                     name="toDate"
                                                     className="w-full sm:w-50 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10"
@@ -192,7 +193,7 @@ export default function Step4() {
                                                         setEducationItems(updatedItems);
                                                     }}
                                                 />
-                                                <CalendarIcon className="absolute right-3 top-2.5 h-5 w-5 text-gray-400" />
+                                                {/* <CalendarIcon className="absolute right-3 top-2.5 h-5 w-5 text-gray-400" /> */}
                                             </div>
                                         </div>
                                     </div>
@@ -201,7 +202,7 @@ export default function Step4() {
                             <div className="flex justify-center mt-6">
                                 <button
                                     type="button"
-                                    className="flex items-center gap-2 text-blue-600 border border-blue-600 rounded-full px-4 py-2 hover:bg-blue-50 transition-colors"
+                                    className="flex items-center gap-2 text-blue-600 border border-blue-600 rounded-full px-4 py-2 transition-colors btn-add"
                                     onClick={handleAddEducation}
                                 >
                                     <PlusIcon className="h-4 w-4" />
@@ -211,7 +212,7 @@ export default function Step4() {
 
                             <div>
                                 <div className="py-3">
-                                    <p>Are you currently a student?</p>
+                                    <p className="lable-text">Are you currently a student?</p>
                                     <label  
                                             className="mr-6"
                                             >
@@ -220,7 +221,7 @@ export default function Step4() {
                                             value="yes"
                                             checked={isStudent}
                                             onChange={handleStudentChange}
-                                            className="mr-2"
+                                            className="mr-2 custom-radio"
 
                                         />
                                         Yes
@@ -231,21 +232,21 @@ export default function Step4() {
                                             value="no"
                                             checked={!isStudent}
                                             onChange={handleStudentChange}
-                                            className="mr-4"
+                                            className="mr-4 custom-radio"
                                         />
                                         No
                                     </label>
                                 </div>
 
                                 <div>
-                                    <p>Do you have 3+ years of relevant non-internship professional experience?</p>
+                                    <p className="lable-text">Do you have 3+ years of relevant non-internship professional experience?</p>
                                     <label className="mr-6">
                                         <input
                                             type="radio"
                                             value="yes"
                                             checked={hasExperience}
                                             onChange={handleExperienceChange}
-                                            className="mr-4"
+                                            className="mr-4 custom-radio"
                                         />
                                         Yes
                                     </label>
@@ -255,7 +256,7 @@ export default function Step4() {
                                             value="no"
                                             checked={!hasExperience}
                                             onChange={handleExperienceChange}
-                                            className="mr-4"
+                                            className="mr-4 custom-radio"
                                         />
                                         No
                                     </label>
@@ -266,20 +267,21 @@ export default function Step4() {
                 </div>
 
 
+           
                 {/* Form Actions */}
-                <div className="flex justify-end space-x-4 border-t border-gray-200 pt-6">
+                <div className="flex justify-end space-x-4 border-t border-gray-200 pt-6 ">
                     <button
                         type="button"
-                        className="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 btn-back"
                     >
                         Back
                     </button>
+
                     <button
-                        type="submit"
-                        className="px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center"
+                        className="btn-continue d-flex align-items-center gap-2 border border-gray-300 text-gray-700  focus:outline-none focus:ring-2 focus:ring-indigo-500 btn-continue"
+                        onClick={() => setSelectedStep(5)}
                     >
-                        Save and Continue
-                        <ChevronRight className="ml-2 h-4 w-4" />
+                        Save and Continue <Arrow />
                     </button>
                 </div>
             </form>

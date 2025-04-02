@@ -6,6 +6,7 @@ import "./UserFormStyle/importoption.css";
 import { ReactComponent as UploadResume } from "../icons/uploadResume.svg";
 import { ReactComponent as UploadMenual } from "../icons/menual.svg";
 import { ReactComponent as UploadLinkdin } from "../icons/linkdin.svg";
+import { ReactComponent as Arrow } from "../icons/arrow.svg";
 
 const options = [
   { id: "upload", name: "Upload Resume", icon: UploadResume },
@@ -49,9 +50,8 @@ function ImportOptions({ onFileChange, setSelectedStep }) {
         {options.map((option) => (
           <div className="col-md-4 selectCard" key={option.id}>
             <div
-              className={`p-4 d-flex flex-column align-items-center justify-content-center h-100 cursor-pointer ${
-                selectedOption === option.id ? "import-box-select font-color selected-bg-card" : "import-box"
-              }`}
+              className={`p-4 d-flex flex-column align-items-center justify-content-center h-100 cursor-pointer ${selectedOption === option.id ? "import-box-select font-color selected-bg-card" : "import-box"
+                }`}
               style={{ cursor: "pointer", maxHeight: "120px", gap: "10px" }}
               onClick={() => handleOptionClick(option.id)}
             >
@@ -72,7 +72,7 @@ function ImportOptions({ onFileChange, setSelectedStep }) {
 
             {!file ? (
               <div
-                className="resumeUpload border-1 border-dashed rounded p-4 text-center cursor-pointer"
+                className="resumeUpload border-2 border-dashed rounded p-4 text-center cursor-pointer"
                 onClick={() => fileInputRef.current?.click()}
               >
                 <input
@@ -129,8 +129,11 @@ function ImportOptions({ onFileChange, setSelectedStep }) {
       </div>
 
       <div className="mt-4 d-flex justify-content-end">
-        <button className="btn btn-primary" onClick={() => setSelectedStep(2)}>Continue</button>
+        <button className="btn-continue d-flex align-items-center gap-2" onClick={() => setSelectedStep(2)}>
+          Continue <Arrow />
+        </button>
       </div>
+
     </>
   );
 }

@@ -24,3 +24,60 @@
         padding: 10px;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Hide the default date picker icon in Webkit browsers (Chrome, Safari, Edge) */
+.custom-date-input::-webkit-calendar-picker-indicator {
+    /* display: none; */
+  }
+  
+  /* Hide the default date picker icon in Firefox */
+  .custom-date-input::-moz-calendar-picker-indicator {
+    display: none;
+  }
+  
+  /* Ensure the input field looks consistent across browsers */
+  .custom-date-input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+  
+  /* Optional: Style the placeholder text if needed */
+  .custom-date-input:invalid {
+    color: #9ca3af; /* Gray-400 for placeholder-like text */
+  }
+  
+  /* Ensure the custom icon is visible and positioned correctly */
+  .custom-date-input + svg {
+    pointer-events: none; /* Prevent the icon from blocking clicks on the input */
+  }

@@ -1,4 +1,4 @@
-Custom styles to complement Bootstrap
+
 .bg-opacity-10 {
     --bs-bg-opacity: 0.1;
   }
@@ -11,7 +11,56 @@ Custom styles to complement Bootstrap
   .border-secondary:hover {
     border-color: #6c757d !important;
   }
-  
+  .btn-add{
+    background-color: #F7F5FF;
+    border: 1px solid#4318FF;
+    font-weight: 500;
+    color: #4318FF;
+  }  
+
+  .btn-add:hover{
+    background-color: #f1eff9;
+  }
+
+  .custom-radio{
+    accent-color: #4318FF;
+  }
+
+  .text-heading{
+    font-size: 18px;
+  }
+
+  .lable-text{
+    font-size: 14px;
+    color: #2B3674;
+  }
+
+  .small-text{
+    font-size: 14px;
+  }
+
+  .btn-continue{
+    padding: 8px 16px;
+    background-color: #4318FF;
+    color: white;
+    font-size: 14px;
+
+    border-radius: 46px;
+  }
+  .btn-back{
+    padding: 10px 16px;
+    background-color: #F4F7FE;
+    color: black;
+    border-radius: 46px;
+    width: 97px;
+    font-size: 14px;
+
+    font-weight: 600;
+  }
+
+
+
+
   /* Transition effects */
   .border,
   .bg-primary,
@@ -34,6 +83,10 @@ Custom styles to complement Bootstrap
   .smText{
     font-size: 14px;
   }
+
+
+
+  
   
   
   
@@ -149,6 +202,7 @@ Custom styles to complement Bootstrap
   background-color: #f6f7fb;
   border-radius: 16px;
   padding: 20px;
+  min-height: calc(100vh - 40px);
 }
 
 /* Content Area (Takes Remaining Space) */

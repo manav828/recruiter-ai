@@ -86,6 +86,8 @@ import Sidebar from "./Sidebar";
 import ImportOptions from "./Step1";
 import JobProfileForm from "./Step2";
 import Experience from "./Step3";
+import Step5 from "./Step5";
+import Step6 from "./Step6";
 import Step4 from "./step4";
 
 function MainJobApplicationForm() {
@@ -133,6 +135,8 @@ function MainJobApplicationForm() {
           {selectedStep === 2 && <JobProfileForm setSelectedStep={setSelectedStep} />}
           {selectedStep === 3 && <Experience setSelectedStep={setSelectedStep} />}
           {selectedStep === 4 && <Step4 setSelectedStep={setSelectedStep} />}
+          {selectedStep === 5 && <Step5 setSelectedStep={setSelectedStep} />}
+          {selectedStep === 6 && <Step6 setSelectedStep={setSelectedStep} />}
         </div>
       </div>
     </div>

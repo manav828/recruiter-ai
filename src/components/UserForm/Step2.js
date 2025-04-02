@@ -1,8 +1,10 @@
 import { useState } from "react"
 import { ChevronRight } from "lucide-react"
 import "./UserFormStyle/MyInformation.css"
+import { ReactComponent as Arrow } from "../icons/arrow.svg";
 
-export default function ProfileVerificationForm({setSelectedStep}) {
+
+export default function ProfileVerificationForm({ setSelectedStep }) {
   const [formData, setFormData] = useState({
     fullName: "Harsh Shah",
     jobTitle: "Senior Product Designer",
@@ -202,41 +204,41 @@ export default function ProfileVerificationForm({setSelectedStep}) {
                 </div>
 
                 <div>
-  <label htmlFor="phoneNumberWithCode" className="block text-sm text-gray-600 mb-1">
-    Phone Number
-  </label>
-  <div className="flex items-center border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-indigo-500">
-    {/* Country Code Dropdown */}
-    <div className="relative">
-      <select
-        id="countryCode"
-        name="countryCode"
-        value={formData.countryCode}
-        onChange={handleInputChange}
-        className="appearance-none  text-gray-700 px-4 py-2 pr-8 rounded-l-md focus:outline-none"
-      >
-        <option value="+91">🇮🇳 +91</option>
-        <option value="+1">🇺🇸 +1</option>
-        <option value="+44">🇬🇧 +44</option>
-        <option value="+1">🇨🇦 +1</option>
-      </select>
-      <div className="absolute inset-y-0 right-2 flex items-center pointer-events-none">
-        ⌵
-      </div>
-    </div>
+                  <label htmlFor="phoneNumberWithCode" className="block text-sm text-gray-600 mb-1">
+                    Phone Number
+                  </label>
+                  <div className="flex items-center border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-indigo-500">
+                    {/* Country Code Dropdown */}
+                    <div className="relative">
+                      <select
+                        id="countryCode"
+                        name="countryCode"
+                        value={formData.countryCode}
+                        onChange={handleInputChange}
+                        className="appearance-none  lable-text px-4 py-2 pr-8 rounded-l-md focus:outline-none"
+                      >
+                        <option value="+91">🇮🇳 +91</option>
+                        <option value="+1">🇺🇸 +1</option>
+                        <option value="+44">🇬🇧 +44</option>
+                        <option value="+1">🇨🇦 +1</option>
+                      </select>
+                      <div className="absolute inset-y-0 right-2 flex items-center pointer-events-none">
+                        ⌵
+                      </div>
+                    </div>
 
-    {/* Phone Number Input */}
-    <input
-      type="text"
-      id="phoneNumberWithCode"
-      name="phoneNumberWithCode"
-      placeholder="Enter phone number"
-      value={formData.phoneNumberWithCode}
-      onChange={handleInputChange}
-      className="w-full px-4 py-2 border-l border-gray-300 focus:outline-none"
-    />
-  </div>
-</div>
+                    {/* Phone Number Input */}
+                    <input
+                      type="text"
+                      id="phoneNumberWithCode"
+                      name="phoneNumberWithCode"
+                      placeholder="Enter phone number"
+                      value={formData.phoneNumberWithCode}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-2 border-l border-gray-300 focus:outline-none"
+                    />
+                  </div>
+                </div>
 
               </div>
             </div>
@@ -289,9 +291,9 @@ export default function ProfileVerificationForm({setSelectedStep}) {
                       value="Full Time"
                       checked={formData.jobType === "Full Time"}
                       onChange={handleInputChange}
-                      className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300"
+                      className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 custom-radio"
                     />
-                    <label htmlFor="fullTime" className="ml-2 text-sm text-gray-700">
+                    <label htmlFor="fullTime" className="ml-2 text-sm lable-text">
                       Full Time
                     </label>
                   </div>
@@ -303,9 +305,9 @@ export default function ProfileVerificationForm({setSelectedStep}) {
                       value="Part Time"
                       checked={formData.jobType === "Part Time"}
                       onChange={handleInputChange}
-                      className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300"
+                      className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 custom-radio"
                     />
-                    <label htmlFor="partTime" className="ml-2 text-sm text-gray-700">
+                    <label htmlFor="partTime" className="ml-2 text-sm lable-text">
                       Part Time
                     </label>
                   </div>
@@ -316,21 +318,22 @@ export default function ProfileVerificationForm({setSelectedStep}) {
         </div>
 
         {/* Form Actions */}
-        <div className="flex justify-end space-x-4 border-t border-gray-200 pt-6">
+        <div className="flex justify-end space-x-4 border-t border-gray-200 pt-6 ">
           <button
             type="button"
-            className="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 btn-back"
           >
             Back
           </button>
+
           <button
-            type="submit"
-            className="px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 flex items-center" onClick={() => setSelectedStep(3)}
+            className="btn-continue d-flex align-items-center gap-2 border border-gray-300 text-gray-700  focus:outline-none focus:ring-2 focus:ring-indigo-500 btn-continue"
+            onClick={() => setSelectedStep(3)}
           >
-            Save and Continue
-            <ChevronRight className="ml-2 h-4 w-4" />
+            Save and Continue <Arrow />
           </button>
         </div>
+
       </form>
     </div>
   )
