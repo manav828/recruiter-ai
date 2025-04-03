@@ -861,7 +861,7 @@ export default function ProfileVerificationForm({ setSelectedStep, formData, upd
 
           <button
             type="submit"
-            className="btn-continue d-flex align-items-center gap-2 border border-gray-300 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="btn-continue d-flex align-items-center gap-2 border border-gray-300  focus:outline-none focus:ring-2 focus:ring-indigo-500"
           >
             Save and Continue <Arrow />
           </button>

@@ -278,7 +278,7 @@ export default function Step4({ setSelectedStep }) {
                     </button>
 
                     <button
-                        className="btn-continue d-flex align-items-center gap-2 border border-gray-300 text-gray-700  focus:outline-none focus:ring-2 focus:ring-indigo-500 btn-continue"
+                        className="btn-continue d-flex align-items-center gap-2 border border-gray-300   focus:outline-none focus:ring-2 focus:ring-indigo-500 btn-continue"
                         onClick={() => setSelectedStep(5)}
                     >
                         Save and Continue <Arrow />
