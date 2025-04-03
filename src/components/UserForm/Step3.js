@@ -672,10 +672,18 @@ export default function Experience({ setSelectedStep }) {
                                         <Note className="text-gray-500" width="24px" height="24px" />
 
                                         {/* File Details */}
-                                        <div>
-                                            <p className="text-gray-800 text-sm font-medium mb-1 smText">{uploadedFile.name}</p>
-                                            <p className="text-gray-500 text-xs mb-1">{uploadedFile.size} KB · <span className="text-green-500"> <CheckmarkIcon className="text-gray-500" width="10px" height="10px" />Uploaded</span></p>
-                                        </div>
+                                        <div className="flex flex-col">
+  {/* File Name */}
+  <p className="text-gray-800 text-sm font-medium smText mb-1 ">{uploadedFile.name}</p>
+
+  {/* File Size, Icon, and Uploaded Text aligned properly */}
+  <div className="flex items-center gap-1 text-gray-500 text-xs">
+    <p className="p-0 m-0">{uploadedFile.size} KB ·</p>
+    <CheckmarkIcon className="text-green-500" width="12px" height="12px" />
+    <span className="text-green-500">Uploaded</span>
+  </div>
+</div>
+
                                     </div>
 
                                     {/* Right Section: Delete Button */}
