@@ -666,18 +666,32 @@ export default function ProfileVerificationForm({ setSelectedStep, formData, upd
                   <label htmlFor="phoneDeviceType" className="block text-sm text-gray-600 mb-1">
                     Phone Device Type <span className="text-red-500">*</span>
                   </label>
-                  <select
-                    id="phoneDeviceType"
-                    name="phoneDeviceType"
-                    value={profileData.phoneDeviceType}
-                    onChange={handleInputChange}
-                    className={`w-full px-4 py-2 border ${errors.phoneDeviceType ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 appearance-none bg-white`}
-                  >
-                    <option value="">Select One</option>
-                    <option value="mobile">Mobile</option>
-                    <option value="home">Home</option>
-                    <option value="work">Work</option>
-                  </select>
+                  <div className="relative w-full">
+  <select
+    id="phoneDeviceType"
+    name="phoneDeviceType"
+    value={profileData.phoneDeviceType}
+    onChange={handleInputChange}
+    className={`w-full px-4 py-2 border ${errors.phoneDeviceType ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 pr-8 appearance-none bg-white`}
+  >
+    <option value="">Select One</option>
+    <option value="mobile">Mobile</option>
+    <option value="home">Home</option>
+    <option value="work">Work</option>
+  </select>
+
+  {/* Custom dropdown icon */}
+  <svg
+    className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+  </svg>
+</div>
+
                   {errors.phoneDeviceType && (
                     <div className="error-message text-red-500 text-sm mt-1 flex items-center">
                       <AlertCircle size={16} className="mr-1" />
@@ -743,18 +757,31 @@ export default function ProfileVerificationForm({ setSelectedStep, formData, upd
                   <label htmlFor="experienceLevel" className="block text-sm text-gray-600 mb-1">
                     Experience Level <span className="text-red-500">*</span>
                   </label>
-                  <select
-                    id="experienceLevel"
-                    name="experienceLevel"
-                    value={profileData.experienceLevel}
-                    onChange={handleInputChange}
-                    className={`w-full px-4 py-2 border ${errors.experienceLevel ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 appearance-none bg-white`}
-                  >
-                    <option value="Entry">Entry Level</option>
-                    <option value="Mid">Mid Level</option>
-                    <option value="Senior">Senior Level</option>
-                    <option value="Executive">Executive Level</option>
-                  </select>
+                {/* Experience Level Dropdown */}
+<div className="relative w-full">
+  <select
+    id="experienceLevel"
+    name="experienceLevel"
+    value={profileData.experienceLevel}
+    onChange={handleInputChange}
+    className={`w-full px-4 py-2 border ${errors.experienceLevel ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 pr-8 appearance-none bg-white`}
+  >
+    <option value="Entry">Entry Level</option>
+    <option value="Mid">Mid Level</option>
+    <option value="Senior">Senior Level</option>
+    <option value="Executive">Executive Level</option>
+  </select>
+  {/* Custom dropdown icon */}
+  <svg
+    className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+  </svg>
+</div>
                   {errors.experienceLevel && (
                     <div className="error-message text-red-500 text-sm mt-1 flex items-center">
                       <AlertCircle size={16} className="mr-1" />
