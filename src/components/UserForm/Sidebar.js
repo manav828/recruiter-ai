@@ -8,8 +8,9 @@ const steps = [
   { id: 3, name: "My Experience" },
   { id: 4, name: "Education" },
   { id: 5, name: "Work Eligibility" },
-  { id: 6, name: "Self Identify" },
-  { id: 7, name: "Review" },
+  { id: 6, name: "Blocked Companies" },
+  { id: 7, name: "Self Identify" },
+  { id: 8, name: "Review" },
 ];
 
 function Sidebar({ selectedStep, setSelectedStep }) {

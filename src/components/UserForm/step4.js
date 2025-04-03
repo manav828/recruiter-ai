@@ -272,7 +272,7 @@ export default function Step4({ setSelectedStep }) {
                 <div className="flex justify-end space-x-4 border-t border-gray-200 pt-6 ">
                     <button
                         type="button"
-                        className="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 btn-back"
+                        className="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 btn-back"  onClick={() => setSelectedStep(3)}
                     >
                         Back
                     </button>

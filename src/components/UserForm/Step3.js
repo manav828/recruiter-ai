@@ -673,16 +673,16 @@ export default function Experience({ setSelectedStep }) {
 
                                         {/* File Details */}
                                         <div className="flex flex-col">
-  {/* File Name */}
-  <p className="text-gray-800 text-sm font-medium smText mb-1 ">{uploadedFile.name}</p>
+                                            {/* File Name */}
+                                            <p className="text-gray-800 text-sm font-medium smText mb-1 ">{uploadedFile.name}</p>
 
-  {/* File Size, Icon, and Uploaded Text aligned properly */}
-  <div className="flex items-center gap-1 text-gray-500 text-xs">
-    <p className="p-0 m-0">{uploadedFile.size} KB ·</p>
-    <CheckmarkIcon className="text-green-500" width="12px" height="12px" />
-    <span className="text-green-500">Uploaded</span>
-  </div>
-</div>
+                                            {/* File Size, Icon, and Uploaded Text aligned properly */}
+                                            <div className="flex items-center gap-1 text-gray-500 text-xs">
+                                                <p className="p-0 m-0">{uploadedFile.size} KB ·</p>
+                                                <CheckmarkIcon className="text-green-500" width="12px" height="12px" />
+                                                <span className="text-green-500">Uploaded</span>
+                                            </div>
+                                        </div>
 
                                     </div>
 
@@ -789,7 +789,7 @@ export default function Experience({ setSelectedStep }) {
                 <div className="flex justify-end space-x-4 border-t border-gray-200 pt-6 ">
                     <button
                         type="button"
-                        className="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 btn-back"
+                        className="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 btn-back" onClick={() => setSelectedStep(2)}
                     >
                         Back
                     </button>

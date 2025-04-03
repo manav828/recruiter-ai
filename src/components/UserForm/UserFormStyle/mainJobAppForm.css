@@ -84,6 +84,13 @@
     font-size: 14px;
   }
 
+  .addBlockCpyTagBg{
+    background-color: #F4F7FE;
+    padding: 9px 24px;
+    font-weight: 400;
+    color: black;
+
+  }
 
 
   
@@ -267,3 +274,4 @@
     padding: 20px;
   }
 }
+
