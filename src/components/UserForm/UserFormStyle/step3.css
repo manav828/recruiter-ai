@@ -34,6 +34,58 @@
 
 
 
+/* step3.css */
+.inputYMargin {
+  margin-bottom: 1rem;
+}
+
+.custom-date-input {
+  /* Ensure consistent height and padding */
+  height: 40px;
+  padding-right: 10px;
+}
+
+
+/* Ensure error messages don’t overflow or disrupt layout */
+.error-message {
+  min-height: 20px; /* Reserve space even when no error */
+  display: flex;
+  align-items: center;
+}
+
+
+
+.from{
+  width: 33%;
+}
+.toCurrently{
+  width: 66%;
+}
+.to{
+  width: 50%;
+}
+
+
+@media screen and (max-width:650px) {
+  
+.from{
+  width: 100%;
+}
+.toCurrently{
+  width: 100%;
+}
+.to{
+  width: 100%;
+}
+}
+
+
+
+
+
+
+
+
 
 
 
